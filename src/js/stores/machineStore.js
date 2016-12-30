@@ -53,6 +53,8 @@ var MachineStore = Reflux.createStore({
         this.trigger(this.machine);
     },
     machineCashOut(){
+        delete Machine.key_1;
+        delete Machine.key_2;        
         let b = Machine.balance;  
         Machine.balance = 0;     
         Machine.message = "Balance cashed out.";  
