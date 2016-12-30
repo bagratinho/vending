@@ -158,3 +158,18 @@ React+Reflux makes it extreemly easy to manipulate you views in accordance with 
 
 All the UI manipulations are done automatically thanks to reacts Rerender on data (state, props) change, so all you need to worry is correctness of the data.
 
+Additionaly: Webpack for module bundling, Babel for JSX interpretation.
+
+# Instalation
+
+Clone repository and inside project folder type
+
+$ npm install
+
+# Build
+
+$ npm run build
+
+# Run by webpack-dev-server
+
+$ npm run start 
