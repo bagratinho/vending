@@ -16,37 +16,81 @@ var Machine = {
 			id: 3
 		},
 		{
-			n:"D",
+			n:"1",
 			id: 4
 		},
 		{
-			n:"E",
+			n:"2",
 			id: 5
 		},
 		{
-			n:"F",
+			n:"3",
 			id: 6
-		},
-		{
-			n:"G",
-			id: 7
-		},
-		{
-			n:"H",
-			id: 8
-		},
-		{
-			n:"I",
-			id: 9
 		}
 	],
 	items: [
 		{
 			key_1: 1,
+			key_2: 4,
+			qtty: 8,
+			price: 20,
+			name: "Snickers"
+		},
+		{
+			key_1: 1,
+			key_2: 5,
+			qtty: 5,
+			price: 15,
+			name: "Bounty"
+		},
+		{
+			key_1: 1,
+			key_2: 6,
+			qtty: 10,
+			price: 10,
+			name: "Mars"
+		},
+		{
+			key_1: 2,
+			key_2: 4,
+			qtty: 2,
+			price: 20,
+			name: "Kit Kat"
+		},
+		{
+			key_1: 2,
+			key_2: 5,
+			qtty: 1,
+			price: 75,
+			name: "M&Ms"
+		},
+		{
+			key_1: 2,
+			key_2: 6,
+			qtty: 6,
+			price: 22,
+			name: "Coca Cola"
+		},
+		{
+			key_1: 3,
+			key_2: 4,
+			qtty: 0,
+			price: 11,
+			name: "Fanta"
+		},
+		{
+			key_1: 3,
 			key_2: 5,
 			qtty: 8,
-			price: 150,
-			name: "Snickers"
+			price: 32,
+			name: "Sprite"
+		},
+		{
+			key_1: 3,
+			key_2: 6,
+			qtty: 8,
+			price: 50,
+			name: "Cola Zero"
 		}
 	]
 }

@@ -71,13 +71,13 @@ var Machine = React.createClass({
 				let keycode = _.findWhere(p.machine.keypad, {id: item.key_1}).n +
 					_.findWhere(p.machine.keypad, {id: item.key_2}).n;
 				let cur = _.findWhere(p.cur.currencies, {id: p.cur.currency});
-
+				let itemClass = (item.qtty == 0) ? "item empty" : "item"; 
 				items.push(
-					<div className="item">
-						<span>{item.dsp_name}</span>
+					<li className={itemClass}>
+						<span>{item.name}</span>
 						<span>{keycode} - {item.price*cur.multiplier}{cur.dsp_name}</span>
 						<span>{item.qtty}</span>
-					</div>
+					</li>
 				)	
 			})
 
@@ -89,20 +89,24 @@ var Machine = React.createClass({
 		let cur = _.findWhere(p.cur.currencies, {id: p.cur.currency});
 		return (
 			<div className="machine">
-				<div className="machine-balance">
-					<div>{p.machine.balance*cur.multiplier}{cur.dsp_name}</div>
-				</div>
-				<div className="machine-display">
-					<div>{p.machine.message}</div>
-				</div>
-				<div className="machine-cashier">
-					{this.buildCashier()}
-				</div>
-				<div className="machine-keypad">
-					{this.buildKeypad()}
+				<div className="machine-right">
+					<div className="machine-visual">
+						<div className="machine-balance">
+							<div>Credit: {p.machine.balance*cur.multiplier}{cur.dsp_name}</div>
+						</div>
+						<div className="machine-display">
+							<div>{p.machine.message}</div>
+						</div>
+					</div>
+					<div className="machine-cashier">
+						{this.buildCashier()}
+					</div>
+					<div className="machine-keypad">
+						{this.buildKeypad()}
+					</div>
 				</div>
 				<div className="machine-content">
-					{this.buildMachineContent()}
+					<ul className="clearfix">{this.buildMachineContent()}</ul>
 				</div>
 			</div>
 		);
