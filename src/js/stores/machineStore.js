@@ -46,15 +46,16 @@ var MachineStore = Reflux.createStore({
 		this.trigger(this.machine);
     },
     cancelInput(){
-    	delete Machine.key_1;
-    	delete Machine.key_2;
-		Machine.message = "Input canceled, choose another.";   
-    	this.machine = Machine;
-		this.trigger(this.machine);
+        delete Machine.key_1;
+        delete Machine.key_2;
+        Machine.message = "Input canceled, choose another.";   
+        this.machine = Machine;
+        this.trigger(this.machine);
     },
     machineCashOut(){
         let b = Machine.balance;  
-        Machine.balance = 0;      
+        Machine.balance = 0;     
+        Machine.message = "Balance cashed out.";  
         this.machine = Machine;
         this.trigger(this.machine);
         Actions.userCashOut(b)
@@ -67,7 +68,7 @@ var MachineStore = Reflux.createStore({
     	if(typeof item !== "undefined"){
     		if(item.qtty>0 && item.price <= Machine.balance){
     			item.qtty--;
-				Machine.message = "You bought a "+item.name+"."; 
+				Machine.message = "You bought "+item.name+"."; 
 				Machine.balance = Machine.balance - item.price;
 				Actions.addToUserList(item.name);
     		} else if(item.qtty<=0){
@@ -76,8 +77,11 @@ var MachineStore = Reflux.createStore({
     			Machine.message = "Not enough machine balance, please deposit more.";
     		}
     	} else {
-			Machine.message = "No such product, please cancel and retype."; 
+			Machine.message = "No such product."; 
     	}
+
+        delete Machine.key_1;
+        delete Machine.key_2;   
     	this.machine = Machine;
 		this.trigger(this.machine);
     }

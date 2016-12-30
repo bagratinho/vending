@@ -4,12 +4,12 @@ let Currency = {
 		{
 			id: 1,
 			multiplier: 1,
-			dsp_name: "$"
+			dsp_name: "€"
 		},
 		{
 			id: 2,
-			multiplier: 0.75,
-			dsp_name: "€"
+			multiplier: 1.2,
+			dsp_name: "$"
 		}
 	],	
 }

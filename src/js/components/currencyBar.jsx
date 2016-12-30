@@ -22,7 +22,7 @@ var CurrencyBar = React.createClass({
 	},
 	render() {
 		return (
-			<div className="">
+			<div className="currency-bar">
 				{this.buildSelect()}
 			</div>
 		);
