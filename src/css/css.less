@@ -1,0 +1,644 @@
+@bg-cl: #ffffff;
+@text-clr: #6d6d6d;
+@def-font: Roboto;
+@fu: 8px;
+@gray: #ccc;
+@green: #8db580;
+@red: #f9564f;
+@blue: #224870;
+@yellow: #f9ce4f;
+@lgblue: lighten(#224870, 50%);
+@gridwidth: 1200px;
+@detailheight: @gridwidth/6;
+
+html{	
+	font-size: @fu;
+}
+body{
+	background: @bg-cl;
+	color: @text-clr;
+	font-family: @def-font;
+	overflow-y: scroll;
+	font-size: 2rem;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	li{
+		display: block;
+		lis-style: none;
+	}
+}
+.clearfix:after{
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+	width: 100%;
+}
+
+/* LIST STYLES */
+
+.list-wrapper{
+	width: @gridwidth;
+	margin: 20px auto;
+	max-width: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;
+	ul.heading{
+		li{
+			float: left;
+			width: 12.5%;
+			padding: 0 10px;
+			box-sizing: border-box;
+			font-size: 1.75rem;
+			min-height: 20px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		li:nth-child(n+5){
+			text-align: center;
+		}
+		li:not(:last-child){
+			border-right: solid 1px @gray;
+		}		
+	}	
+	> ul.heading{
+	    padding: 10px 0 0 0;
+	    box-sizing: border-box;
+	    border-bottom: solid 1px #6d6d6d;
+	    margin: 0 0 10px 0;
+	    font-weight: bold;
+	    border-radius: 6px 6px 0 0;
+	    line-height: 30px;
+		box-shadow: 0 1px 0 0 #fff;
+		> li:not(:last-child){
+			border-right: solid 1px #6d6d6d;
+		}		
+	}  	
+	.item-list ul.heading{
+		padding: 10px 0;
+		box-sizing: border-box;
+	}	
+	.item-list:last-child{
+		margin-bottom: 0;
+	}
+	.title-loader{
+		text-align: center;
+		line-height: 30px;
+	}
+	.loading{
+		height: 80px;
+	}
+	.no-items{
+	    border: dashed 1px @gray;
+	    background: #dadada;
+	    padding: 20px;
+	    line-height: 30px;
+	    text-align: center;
+	}	
+}
+
+/* ITEM IN THE LIST STYLES */
+
+.item-wrapper{
+	transition: all 0.25s ease-in-out;	
+	position: relative;
+	border: solid 1px @gray;
+	background: #efefef;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 0 #fff;
+    overflow: hidden;
+	margin: 0 0 10px 0;
+	.heading{
+		cursor: pointer;
+		li:first-child{
+			position: relative;
+			padding-left: 40px;
+		}
+		li:first-child i{
+			position: absolute;
+			left: 20px;
+			top: 0;
+			line-height: 20px;
+		}
+	}	
+	&.accepted,
+	&.complete{
+		border: solid 1px @green;
+		background: rgba(53, 199, 120, 0.1);	
+		.heading{
+			li:nth-child(1) i,
+			li:nth-child(4){
+				color: @green;
+				font-weight: 600;
+			}
+		}
+	}	
+	&.failed,
+	&.rejected{
+	    border: solid 1px @red;
+	    background: rgba(220, 60, 60, 0.1);		
+		.heading{
+			li:nth-child(1) i,
+			li:nth-child(4){
+				color: @red;
+				font-weight: 600;
+			}
+		}
+	}
+	&.running{
+	    border: solid 1px @blue;
+	    background: rgba(43, 54, 191, 0.1);
+		.heading{
+			li:nth-child(1) i,
+			li:nth-child(4){
+				color: @blue;
+				font-weight: 600;
+			}
+		}		
+	}	
+	&:before{
+		position: absolute;
+		background: #fff;
+		width: 100%;
+		height: 100%;
+		content: "";
+		top: 0;
+		z-index: -1;
+	}	
+	&.false > div{
+		display: none;
+	}
+	> div{
+		margin: 0 10px 10px 10px;
+	    border-top: solid 1px;
+	}	
+	&.true{
+	    box-shadow: 0 0 5px 0 @gray;
+		.heading li:nth-child(n+5){
+			display: none;
+		}	 
+		&.complete,
+		&.accepted{
+			border-color: @green;
+		    box-shadow: 0 0 5px 0 @green;
+		}
+		&.failed,
+		&.rejected{
+			border-color: @red;
+		    box-shadow: 0 0 5px 0 @red;
+		}
+		&.running{
+			border-color: @blue;
+		    box-shadow: 0 0 5px 0 @blue;
+		}		   
+	}
+}
+
+/* DETAILS ROW STYLES */
+
+.d-row > div{
+	width: 20%;
+	float: left;
+	box-sizing: border-box;
+	padding: 0 10px;
+	&.complete,
+	&.accepted{
+		.detail-wrapper{
+			border-color: @green;
+		    box-shadow: 0 0 5px 0 @green;			
+		}
+	}
+	&.running{
+		.detail-wrapper{
+			border-color: @blue;
+		    box-shadow: 0 0 5px 0 @blue;	
+		}
+	}
+	&.failed,
+	&.rejected{
+		.detail-wrapper{
+			border-color: @red;
+		    box-shadow: 0 0 5px 0 @red;
+		}
+	}
+	&.pending {
+		.detail-wrapper{
+			border-color: @gray;
+		    box-shadow: 0 0 5px 0 @gray;
+		}
+	}
+	h3{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}		
+}
+
+.d-row > div.final-overview span.accepted ,
+.d-row > div.final-overview span.complete ,
+.d-row > div.final-overview p.accepted ,
+.d-row > div.final-overview p.complete ,
+.d-row > div.complete .bar-chart,
+.d-row > div.accepted .bar-chart,
+.d-row > div.complete .chart label,
+.d-row > div.accepted .chart label{
+	color: @green;
+}
+.d-row > div.final-overview span.running ,
+.d-row > div.final-overview p.running ,
+.d-row > div.running .bar-chart,
+.d-row > div.running .chart label{
+	color: @blue;
+}
+.d-row > div.final-overview span.failed ,
+.d-row > div.final-overview span.rejected ,
+.d-row > div.final-overview p.failed ,
+.d-row > div.final-overview p.rejected ,
+.d-row > div.failed .bar-chart,
+.d-row > div.failed .chart label,
+.d-row > div.rejected .bar-chart,
+.d-row > div.rejected .chart label{
+	color: @red;
+}
+.d-row > div.final-overview span.pending ,
+.d-row > div.final-overview p.pending ,
+.d-row > div.pending .bar-chart,
+.d-row > div.pending .chart label{
+	color: @gray;
+}
+.d-row > div.complete h3,
+.d-row > div.accepted h3{
+	color: @green;	
+}
+.d-row > div.running h3{
+	color: @blue;
+}
+.d-row > div.failed h3,
+.d-row > div.rejected h3{
+	color: @red;
+}
+.d-row > div.pending h3{
+	color: #6d6d6d;
+}
+
+.detail-wrapper{
+	height: @detailheight;
+	background: #fff;
+	border: solid 1px;
+	border-radius: 4px;
+	box-sizing: border-box;
+	overflow: hidden;
+	cursor: pointer;
+	.arrow-box{
+		width: 50%;
+		float: left;
+		height: 100px;
+		&:nth-child(1){
+			border-right: solid 1px @gray;
+			border-bottom: solid 1px @gray;
+			box-sizing: border-box;
+		}
+		&:nth-child(2){
+			border-bottom: solid 1px @gray;
+			box-sizing: border-box;
+		}
+		&:nth-child(3){
+			border-right: solid 1px @gray;
+			box-sizing: border-box;
+		}	
+		&.up div:first-child{
+			&:before{
+				background: @green;
+			}
+			&:after{
+				border-bottom: solid 16px @green;
+				margin: -42px -16px;
+			}			
+		}
+		&.down div:first-child{
+			&:before{
+				background: @red;
+			}
+			&:after{
+				border-top: solid 16px @red;
+				margin: 10px -16px;				
+			}	
+		}
+		&.level div:first-child{
+			&:before{
+				background: @yellow;
+			}	
+			&:after{
+				border-left: solid 16px @yellow;
+				margin: -16px -42px;
+			}				
+		}		
+		div:first-child{
+			position: relative;
+			font-size: 3.75rem;
+			text-align: center;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			line-height: 70px;
+			font-weight: 300;
+			span{
+				position: relative;
+				z-index: 1;
+				text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff, -1px -1px 0px #fff,
+				1px 0 0px #fff, 0 -1px 0px #fff, -1px 0 0px #fff, 0 1px 0px #fff;
+			}			
+			&:before{
+				position: absolute;
+				content: "";
+				background: @gray;
+				left: 50%;
+				top: 50%;
+				margin: -10px;
+				height: 20px;
+				width: 20px;
+			}
+			&:after{
+				position: absolute;
+				content: "";
+				width: 0;
+				height: 0;
+				border: solid 16px transparent;
+				top: 50%;
+				right: 50%;				
+			}			
+		}	
+		div:last-child{
+			font-size: 1.5rem;
+			text-align: center;
+			padding: 0 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			line-height: 20px;
+		}			
+	}	
+	.st-btn{
+		box-sizing: border-box;
+		text-align: center;
+		display: inline-block;
+		width: 40%;
+		margin: 30px 5%;
+		border: 0;
+		border-radius: 4px;
+		background: @blue;
+		color: #fff;
+		font-size: 1.5rem;
+		padding: 10px;
+		i{
+			display: block;
+			font-size: 4rem;
+			text-align: center;
+		}		
+	}	
+	.date{
+	    text-align: center;
+	    padding: 20px 10px;
+	}	
+	.n-a{
+	    text-align: center;
+	    line-height: @detailheight
+	}	
+}
+
+.chart{
+	position: relative;
+	label{
+	    position: absolute;
+	    z-index: 1;
+	    left: 50%;
+	    top: 50%;
+	    width: 60px;
+	    height: 60px;
+	    text-align: center;
+	    margin: -30px;
+	    font-size: 2rem;
+	    box-sizing: border-box;
+	    padding-top: 10px;
+		span{
+			display: block;
+			font-size: 1.125rem;
+		}	    
+	}
+}
+.bar-chart{
+    height: 8px;
+    background: @red;	
+    position: relative;
+    text-align: center;
+    color: #fff;
+    margin: 0 10px;
+	&:before{
+		position: absolute;
+		font-size: 1.75rem;
+		width: 40px;
+		line-height: 20px;
+		left: 50%;
+		top: 8px;
+		margin: 0 -20px;
+		content: attr(data-perc);
+		font-weight: 700;
+	}    
+	&:after{
+		position: absolute;
+		font-size: 1.25rem;
+		width: 70px;
+		line-height: 12px;
+		left: 50%;
+		top: 23px;
+		margin: 0 -35px;
+		content: attr(data-label);
+	}    
+	span{
+		display:block;
+	    height: 8px;
+	    background: @green;	
+	    border-right: solid 1px #fff;
+	    box-sizing: border-box;
+	}
+}
+.d-row > div.final-overview button{
+	box-sizing: border-box;
+    text-align: center;
+    display: inline-block;
+    border: 0;
+    border-radius: 4px;
+    background: @blue;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+.d-row > div.final-overview{
+	padding-top: 63px;
+	height: @detailheight;
+	text-align: center;
+}
+.d-row > div.final-overview label,
+.d-row > div.final-overview p,
+.d-row > div.final-overview span{
+	display: block;
+	margin: 0 0 5px 0;
+}
+.d-row > div.final-overview span{
+	font-size: 1.5rem;
+}
+
+
+/* UNEXPENDED STATUS INDICATORS */
+
+.status-ind{
+    display: block;
+    width: 50%;
+    height: 19px;
+    margin: 0 auto;
+    box-shadow: 0 0 1px 0 #fff, 0 0 5px 0 rgba(0, 0, 0, 0.31) inset;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+	span{
+		display: block;
+		height: 100%;
+	    background: @lgblue;
+	    box-sizing: border-box;
+	    border: solid 1px @blue;
+	    border-radius: 3px 0 0 3px;
+	    border-right: 0;    
+	}
+    &:after{
+		position: absolute;
+		content: attr(data-perc);
+		font-size: 1.5rem;
+		text-align: center;
+		height: 100%;
+		left: 0;
+		top: 0;
+		width: 100%;
+		color: @blue;
+		font-style: normal;
+	}
+    &.failed,
+	&.rejected{
+		background: @red;
+	} 
+	&.complete{
+		background: @green;
+	}
+}
+
+/* CSS SPINNER RULES */
+.spinner {
+  margin: 40px auto 0;
+  width: 70px;
+  text-align: center;
+	> div {
+	  width: 18px;
+	  height: 18px;
+	  background-color: #8e8e8e;
+	  border-radius: 100%;
+	  display: inline-block;
+	  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	}  
+	.bounce1 {
+	  -webkit-animation-delay: -0.32s;
+	  animation-delay: -0.32s;
+	}
+	.bounce2 {
+	  -webkit-animation-delay: -0.16s;
+	  animation-delay: -0.16s;
+	}		
+}
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+/* MODAL RULES */
+.modal-wrapper{
+	.overlay,
+	.modal-inner,
+	.modal{
+		transition: all 0.3s ease-in-out;
+	}	
+	.overlay,
+	.modal{
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		opacity: 0;
+		visibility: hidden;			
+	}
+	.overlay{
+		opacity: 0;
+		background: rgba(0,0,0,0.5);
+		z-index: 1;
+	}  
+	.modal{
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;	
+		.modal-inner{
+		    width: 500px;
+		    height: 500px;
+		    background: @bg-cl;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+		    border-radius: 10px;
+		    padding: 20px;			
+			transform: scale(1.25);	
+			position: relative;	
+			> button{
+				position: absolute;
+				background: transparent;
+				top: 10px;
+				right: 10px;
+				width: 20px;
+				height: 20px;
+				background-size: cover;
+				border: 0;
+				outline: none;
+				i{
+					position: absolute;
+					width: 20px;
+					height: 20px;
+					top: 0;
+					left: 0;
+					line-height: 20px;
+					color: @text-clr;					
+				}
+			}		
+		}			
+	}
+    &.open{
+    	.modal-inner{
+			transform: scale(1);	
+		}	
+		.overlay,
+		.modal{
+			visibility: visible;
+			opacity: 1;
+		} 
+	}	  	
+}
+
