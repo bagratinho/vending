@@ -1,5 +1,4 @@
 var Machine = {
-	is_busy: 0,
 	balance: 0,
 	message: "Standby",
 	keypad: [
