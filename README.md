@@ -18,7 +18,7 @@ So each of this data sources contain information about itself only
 2. message apearing on the display - message
 3. keypad with all available symbol buttons inside - keyad
 4. respective cells, with information about the name , quantity of the product inside, and the cell code - items
-
+```
 	{
 		balance: 0,
 		message: "Standby",
@@ -114,25 +114,25 @@ So each of this data sources contain information about itself only
 			}
 		]
 	}
-
+```
 
 # User data
 
 1. Username
 2. Balance on users account
 3. List of items bought
-
+```
 {
 	username: "Bagrat",
 	balance: 500,
 	i_list: []
 }
-
+```
 # Currency data
 
 1. currency, as the currency by default
 2. all available currencies, with their ids, display names and most important, multipliers
-
+```
 {
 	currency: 1,
 	currencies: [
@@ -148,7 +148,7 @@ So each of this data sources contain information about itself only
 		}
 	],	
 }
-
+```
 # Currency logic
 
 Users ballance and machine balance values are stored as number, which can be converted to resective currency by multiplying to its multiplication number.
